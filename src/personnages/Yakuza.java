@@ -10,6 +10,10 @@ public class Yakuza extends Humain{
 		this.clan = clan;
 	}
 	
+	public int getReputation() {
+		return reputation;
+	}
+
 	public void extorquer(Commercant victime) {
 		int argentExtorque = victime.getArgent();
 		this.argent = argent + argentExtorque;
@@ -19,6 +23,22 @@ public class Yakuza extends Humain{
 		victime.seFaireExtorquer();
 		parler("J’ai piqué les " + argentExtorque + " sous de " + victime.getNom() +
 				", ce qui me fait " + argent + " sous dans ma poche. Hi ! Hi !");
+	}
+	
+	public int perdre() {
+        int argent = getArgent();
+        setArgent(0);
+        this.reputation = reputation - 1;
+        parler("J’ai perdu mon duel et mes " + argent + " sous, snif... J'ai "
+        		+ "déshonoré le clan de " + clan + ".");
+        return argent;
+	}
+	
+	public void gagner(int gain) {
+		this.argent = argent + gain;
+		this.reputation = reputation + 1;
+		parler("Ce ronin pensait vraiment battre " + getNom() + " du clan de " + clan + " ? "
+				+ "Je l'ai dépouillé de ses " + gain + " sous.");
 	}
 
 }
